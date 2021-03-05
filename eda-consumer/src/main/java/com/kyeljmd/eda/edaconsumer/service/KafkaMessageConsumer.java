@@ -1,15 +1,24 @@
 package com.kyeljmd.eda.edaconsumer.service;
 
-import com.kyeljmd.eda.event.messages.pageevent.PageViewDTO;
+import com.kyeljmd.eda.edaconsumer.event.messages.TransitionsEvent;
+import com.kyeljmd.eda.edaconsumer.event.messages.UsersEvent;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
 @Service
 public class KafkaMessageConsumer {
 
-    @KafkaListener(topics = "pageviews-json")
-    public void listenGroupFoo(PageViewDTO message) {
-        System.out.println("received a message from pageviews-json");
-        System.out.println("Received Message in group foo: " + message.toString());
+    @KafkaListener(topics = "dbchangesUsers",
+            containerFactory = "userKafkaListenerContainerFactory",
+            groupId = "${users.group.id}")
+    public void listenNewApplicants(UsersEvent cv) {
+        System.out.println("Received a message from  " + cv.toString());
+    }
+
+    @KafkaListener(topics = "dbchangesTransitions",
+            containerFactory = "transitionsKafkaListenerContainerFactory",
+            groupId =  "${transitions.group.id")
+    public void listenNewTransitions(TransitionsEvent transitionsEvent) {
+        System.out.println("Received a message from  " + transitionsEvent.toString());
     }
 }

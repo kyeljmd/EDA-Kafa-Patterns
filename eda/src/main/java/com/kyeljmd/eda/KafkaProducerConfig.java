@@ -25,7 +25,7 @@ public class KafkaProducerConfig {
     private String KAFKA_BOOTSTRAP_ADDRESS;
 
     @Bean
-    public ProducerFactory<String, PageViewDTO> producerFactory() {
+    public ProducerFactory<String, Object> producerFactory() {
         Map<String, Object> configProps = new HashMap<>();
         configProps.put(BOOTSTRAP_SERVERS_CONFIG,  KAFKA_BOOTSTRAP_ADDRESS);
         configProps.put(KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
@@ -34,7 +34,7 @@ public class KafkaProducerConfig {
     }
 
     @Bean
-    public KafkaTemplate<String, PageViewDTO> kafkaTemplate() {
-        return new KafkaTemplate<String, PageViewDTO>(producerFactory());
+    public KafkaTemplate<String, Object> kafkaTemplate() {
+        return new KafkaTemplate<>(producerFactory());
     }
 }
