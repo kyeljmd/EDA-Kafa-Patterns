@@ -17,7 +17,7 @@ public class KafkaMessageConsumer {
 
     @KafkaListener(topics = "dbchangesTransitions",
             containerFactory = "transitionsKafkaListenerContainerFactory",
-            groupId =  "${transitions.group.id")
+            groupId =  "${transitions.group.id}")
     public void listenNewTransitions(TransitionsEvent transitionsEvent) {
         System.out.println("Received a message from  " + transitionsEvent.toString());
     }
