@@ -1,0 +1,14 @@
+{
+  "name": "DB2_SampleDB_Connector",
+  "config": {
+    "connector.class": "io.confluent.connect.jdbc.JdbcSourceConnector",
+    "connection.url": "jdbc:db2://host.docker.internal:50000/sample",
+    "connection.user": "kyel",
+    "connection.password": "123qwe",
+    "connection.attempts": "2",
+    "connection.backoff.ms": "2",
+    "mode": "bulk",
+    "validate.non.null": "true",
+    "topic.prefix": "DB2_SampleDB_"
+  }
+}
